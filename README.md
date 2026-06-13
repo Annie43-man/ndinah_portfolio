@@ -48,15 +48,25 @@ python main.py
 ## 📁 Project Structure
 
 web_portfolio/
+
 ├── main.py
+
 ├── profile.jpg
+
 ├── README.md
+
 ├── Matlab Onramp.pdf
+
 ├── Calculation with Vectors and Matrices.pdf
+
 ├── MATLAB Desktop Tools and Troubleshooting Scripts.pdf
+
 ├── Make and Manipulate Matrices.pdf
+
 ├── Explore Data with MATLAB Plots.pdf
+
 ├── Machine Learning Onramp.pdf
+
 └── Simulink Onramp.pdf
 
 ---
