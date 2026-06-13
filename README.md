@@ -31,4 +31,54 @@ This is the personal portfolio of **Martin Ndinelao**, an Electrical Engineering
 
 ## 🚀 How to Run
 
-**1. Clone the repo:**
+1. Clone the repo:
+
+git clone https://github.com/Annie43-man/ndinah_portfolio.git
+
+2. Install Flet:
+
+pip install flet
+
+3. Run the app:
+
+python main.py
+
+---
+
+## 📁 Project Structure
+
+web_portfolio/
+├── main.py
+├── profile.jpg
+├── README.md
+├── Matlab Onramp.pdf
+├── Calculation with Vectors and Matrices.pdf
+├── MATLAB Desktop Tools and Troubleshooting Scripts.pdf
+├── Make and Manipulate Matrices.pdf
+├── Explore Data with MATLAB Plots.pdf
+├── Machine Learning Onramp.pdf
+└── Simulink Onramp.pdf
+
+---
+
+## 📌 Pages
+
+| Page | Status |
+|------|--------|
+| About | ✅ Complete |
+| Skills | 🔧 Coming soon |
+| Portfolio | ✅ Complete |
+| Timeline | 🔧 Coming soon |
+| Projects | 🔧 Coming soon |
+| Blog | 🔧 Coming soon |
+| Experience | 🔧 Coming soon |
+| MATLAB Hub | ✅ Complete |
+| GitHub Evidence | ✅ Complete |
+
+---
+
+## 👤 Author
+
+**Martin Ndinelao**
+- GitHub: [@Annie43-man](https://github.com/Annie43-man)
+- Email: martinndinah@gmail.com
