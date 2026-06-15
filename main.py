@@ -1,8 +1,9 @@
 import flet as ft
+import flet_video as fv
 import os
 import base64
 
-base_dir = r"C:\Users\marti\Desktop\web_portfolio"
+base_dir = os.path.dirname(os.path.abspath(__file__))
 
 with open(os.path.join(base_dir, "profile.jpg"), "rb") as f:
     profile_b64 = base64.b64encode(f.read()).decode("utf-8")
@@ -309,7 +310,7 @@ def main(page: ft.Page):
                         border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
-                        on_click=lambda e, u=github_url: os.startfile(u),
+                        on_click=lambda e, u=github_url: page.launch_url(u),
                     )
                 )
 
@@ -400,9 +401,7 @@ def main(page: ft.Page):
                         border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
-                        on_click=lambda e, f=filename: os.startfile(
-                            os.path.join(base_dir, f)
-                        ),
+                        on_click=lambda e, f=filename: page.launch_url(f"/{f}"),
                     ),
                 ], spacing=6),
                 bgcolor=CARD_BG,
@@ -562,8 +561,6 @@ def main(page: ft.Page):
         )
 
     def blog_page():
-        VIDEO_PATH = os.path.join(base_dir, "Reflection Video.mp4")
-
         return ft.Column(
             controls=[
                 ft.Text("Blog", size=42, color=STAR_WHITE,
@@ -599,15 +596,13 @@ def main(page: ft.Page):
                                 font_family="Courier New",
                                 weight=ft.FontWeight.BOLD),
                         ft.Container(height=12),
-                        ft.Container(
-                            content=ft.Text("▶  Open Video", size=12,
-                                            color=AURORA1, font_family="Courier New",
-                                            weight=ft.FontWeight.BOLD),
-                            padding=sym_pad(horizontal=16, vertical=8),
-                            border=ft.Border.all(1, AURORA1),
-                            border_radius=20,
-                            ink=True,
-                            on_click=lambda e: os.startfile(VIDEO_PATH),
+                        fv.Video(
+                            playlist=[fv.VideoMedia("Reflection Video.mp4")],
+                            width=700,
+                            height=400,
+                            autoplay=False,
+                            show_controls=True,
+                            expand=False,
                         ),
                         ft.Container(height=10),
                         ft.Text(
@@ -644,12 +639,12 @@ def main(page: ft.Page):
                         ),
                         ft.Container(height=10),
                         ft.Text(
-                            "This project taught me a lot — not just about React Native and "
+                            "This project taught me a lot, not just about React Native and "
                             "Firebase, but about what it truly means to work in a real team. "
                             "Dealing with merge conflicts, coordinating 15 people, reviewing "
                             "pull requests, and meeting deadlines showed me what software "
                             "development actually looks like in practice. I learned that "
-                            "engineering is not just circuits and equations — it is "
+                            "engineering is not just circuits and equations, it is "
                             "communication, problem solving under pressure, and building "
                             "things that genuinely help people. Fix-Flow was built for real "
                             "residents of Ongwediva, and that is not a class exercise, that "
@@ -724,7 +719,7 @@ def main(page: ft.Page):
                         controls=[
                             ft.Container(
                                 content=ft.Image(
-                                    src=os.path.join(base_dir, s),
+                                    src=s,
                                     width=320,
                                     height=200,
                                     border_radius=ft.BorderRadius.all(8),
@@ -850,7 +845,7 @@ def main(page: ft.Page):
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src=os.path.join(base_dir, "PR#7.png"),
+                            src="PR#7.png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
@@ -875,13 +870,13 @@ def main(page: ft.Page):
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src=os.path.join(base_dir, "PR# 20.png"),
+                            src="PR# 20.png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src=os.path.join(base_dir, "PR#20-2.png"),
+                            src="PR#20-2.png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
@@ -909,7 +904,7 @@ def main(page: ft.Page):
                                 font_family="Courier New", weight=ft.FontWeight.BOLD),
                         ft.Container(height=8),
                         ft.Image(
-                            src=os.path.join(base_dir, "TOP-COMMITERS GRAPH.png"),
+                            src="TOP-COMMITERS GRAPH.png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
@@ -1007,4 +1002,4 @@ def main(page: ft.Page):
         )
     )
 
-ft.app(target=main)
+ft.app(target=main, view=ft.AppView.WEB_BROWSER, assets_dir=".")
