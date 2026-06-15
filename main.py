@@ -845,7 +845,7 @@ def main(page: ft.Page):
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src="PR#7.png",
+                            src="PR7 .png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
@@ -870,13 +870,13 @@ def main(page: ft.Page):
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src="PR# 20.png",
+                            src="PR20 .png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src="PR#20-2.png",
+                            src="PR20-2 .png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
@@ -1002,4 +1002,6 @@ def main(page: ft.Page):
         )
     )
 
-ft.app(target=main, view=ft.AppView.WEB_BROWSER, assets_dir=".")
+import os
+port = int(os.environ.get("FLET_SERVER_PORT", 8000))
+ft.run(main, view=ft.AppView.WEB_BROWSER, assets_dir=".", port=port)
