@@ -507,7 +507,6 @@ def main(page: ft.Page):
                     contributions=[
                         "Contributed to pitching the Fix-Flow idea to Mr. Abisai",
                         "Fix-Flow officially registered and approved",
-                        "Delivered motivational speech at Ruacana High School (13 Mar)",
                     ],
                     color=AURORA3,
                 ),
@@ -518,7 +517,6 @@ def main(page: ft.Page):
                     title="SRS & MATLAB Certificates",
                     contributions=[
                         "Helped complete and submit the SRS document",
-                        "Earned 5 MATLAB certificates during this phase",
                     ],
                     color=GOLD,
                 ),
@@ -531,7 +529,6 @@ def main(page: ft.Page):
                         "Developed ReportScreen.js — the main home screen of Fix-Flow",
                         "PR #7 submitted and successfully merged",
                         "Reviewed team pull requests and resolved merge conflicts",
-                        "Earned Simulink Onramp certificate (24 Apr)",
                     ],
                     color=AURORA2,
                 ),
@@ -549,7 +546,7 @@ def main(page: ft.Page):
                 ft.Container(height=12),
 
                 week_card(
-                    week="14", dates="08–13 Jun", phase="PHASE 4B",
+                    week="14", dates="08–15 Jun", phase="PHASE 4B",
                     title="Final Submission",
                     contributions=[
                         "Helped finalise and build the APK via Expo EAS",
@@ -565,7 +562,7 @@ def main(page: ft.Page):
         )
 
     def blog_page():
-        VIDEO_PATH = os.path.join(base_dir, "reflection_video.mp4")
+        VIDEO_PATH = os.path.join(base_dir, "Reflection Video.mp4")
 
         return ft.Column(
             controls=[
@@ -643,6 +640,25 @@ def main(page: ft.Page):
                             "15-member team: reviewing pull requests, resolving merge "
                             "conflicts, and keeping the GitHub workflow running smoothly "
                             "across the semester.",
+                            size=13, color=TEXT, font_family="Georgia",
+                        ),
+                        ft.Container(height=10),
+                        ft.Text(
+                            "This project taught me a lot — not just about React Native and "
+                            "Firebase, but about what it truly means to work in a real team. "
+                            "Dealing with merge conflicts, coordinating 15 people, reviewing "
+                            "pull requests, and meeting deadlines showed me what software "
+                            "development actually looks like in practice. I learned that "
+                            "engineering is not just circuits and equations — it is "
+                            "communication, problem solving under pressure, and building "
+                            "things that genuinely help people. Fix-Flow was built for real "
+                            "residents of Ongwediva, and that is not a class exercise, that "
+                            "is real impact. This has been one of the most rewarding "
+                            "experiences of my academic journey so far, and I leave this "
+                            "semester more confident, more skilled, and more excited than "
+                            "ever about the engineer I am becoming. I am proud of what our "
+                            "team built, and I am grateful for every challenge that came "
+                            "with it. Thank you.",
                             size=13, color=TEXT, font_family="Georgia",
                         ),
                     ], spacing=0),
@@ -817,7 +833,6 @@ def main(page: ft.Page):
                 ft.Text("Pull Requests", size=28, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
-
                 ft.Container(
                     content=ft.Column([
                         ft.Text("PR #7 — feat: describe your changes", size=14,
@@ -843,9 +858,7 @@ def main(page: ft.Page):
                     bgcolor=CARD_BG, border_radius=16, padding=20,
                     border=ft.Border.all(1, AURORA1), expand=True,
                 ),
-
                 ft.Container(height=12),
-
                 ft.Container(
                     content=ft.Column([
                         ft.Text("PR #20 — Feature/your feature name", size=14,
@@ -876,12 +889,10 @@ def main(page: ft.Page):
                     bgcolor=CARD_BG, border_radius=16, padding=20,
                     border=ft.Border.all(1, AURORA3), expand=True,
                 ),
-
                 ft.Container(height=24),
                 ft.Text("Impact Summary", size=28, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
-
                 ft.Container(
                     content=ft.Column([
                         ft.Text(
@@ -906,7 +917,6 @@ def main(page: ft.Page):
                     bgcolor=CARD_BG, border_radius=16, padding=20,
                     border=ft.Border.all(1, GOLD), expand=True,
                 ),
-
                 ft.Container(height=24),
             ],
             spacing=12,
