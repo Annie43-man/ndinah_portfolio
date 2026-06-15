@@ -377,13 +377,13 @@ def main(page: ft.Page):
 
     def matlab_page():
         courses = [
-            ("MATLAB Onramp",                            "3 March 2026",  "Matlab Onramp.pdf",                                    AURORA1),
-            ("Calculations with Vectors and Matrices",   "6 March 2026",  "Calculation with Vectors and Matrices.pdf",            AURORA2),
-            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "MATLAB Desktop Tools and Troubleshooting Scripts.pdf", AURORA3),
-            ("Make and Manipulate Matrices",             "20 March 2026", "Make and Manipulate Matrices.pdf",                    GOLD),
-            ("Explore Data with MATLAB Plots",           "20 March 2026", "Explore Data with MATLAB Plots.pdf",                  AURORA1),
-            ("Machine Learning Onramp",                  "18 April 2026", "Machine Learning Onramp.pdf",                        AURORA2),
-            ("Simulink Onramp",                          "24 April 2026", "Simulink Onramp.pdf",                                AURORA3),
+            ("MATLAB Onramp",                            "3 March 2026",  "Matlab-Onramp.pdf",                                    AURORA1),
+            ("Calculations with Vectors and Matrices",   "6 March 2026",  "Calculation-with-Vectors-and-Matrices.pdf",            AURORA2),
+            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "MATLAB-Desktop-Tools-and-Troubleshooting-Scripts.pdf", AURORA3),
+            ("Make-and Manipulate Matrices",             "20 March 2026", "Make-and-Manipulate-Matrices.pdf",                    GOLD),
+            ("Explore Data with MATLAB Plots",           "20 March 2026", "Explore-Data-with-MATLAB-Plots.pdf",                  AURORA1),
+            ("Machine Learning Onramp",                  "18 April 2026", "Machine-Learning-Onramp.pdf",                        AURORA2),
+            ("Simulink Onramp",                          "24 April 2026", "Simulink-Onramp.pdf",                                AURORA3),
         ]
 
         def make_card(name, date, filename, color):
@@ -876,7 +876,7 @@ def main(page: ft.Page):
                         ),
                         ft.Container(height=12),
                         ft.Image(
-                            src="PR20-2 .png",
+                            src="PR20-2.png",
                             width=700,
                             border_radius=ft.BorderRadius.all(8),
                         ),
