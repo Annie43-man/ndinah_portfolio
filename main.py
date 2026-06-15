@@ -7,7 +7,6 @@ base_dir = r"C:\Users\marti\Desktop\web_portfolio"
 with open(os.path.join(base_dir, "profile.jpg"), "rb") as f:
     profile_b64 = base64.b64encode(f.read()).decode("utf-8")
 
-# ── Colours ──────────────────────────────────────
 BG          = "#03010a"
 NEBULA      = "#0d0621"
 CARD_BG     = "#0a0718"
@@ -19,6 +18,9 @@ GOLD        = "#ffd97d"
 TEXT        = "#d8d0f8"
 MUTED       = "#5a5080"
 STAR_WHITE  = "#f0eeff"
+
+def sym_pad(horizontal=0, vertical=0):
+    return ft.Padding.symmetric(horizontal=horizontal, vertical=vertical)
 
 def main(page: ft.Page):
     page.bgcolor = "#03010a"
@@ -35,7 +37,7 @@ def main(page: ft.Page):
             ),
         )
 
-    def about_page():
+    def home_page():
         def info_card(icon_text, label, value, color):
             return ft.Container(
                 content=ft.Row([
@@ -56,56 +58,107 @@ def main(page: ft.Page):
                 ], spacing=12),
                 bgcolor=CARD_BG,
                 border_radius=14,
-                padding=ft.padding.symmetric(horizontal=16, vertical=12),
-                border=ft.border.all(1, CARD_BORDER),
+                padding=sym_pad(horizontal=16, vertical=12),
+                border=ft.Border.all(1, CARD_BORDER),
                 expand=True,
             )
 
-        description_text = (
-            "[ Paste your personal description here. ]"
-        )
-
         return ft.Column(
             controls=[
-                ft.Container(height=40),
-                ft.Row([
-                    ft.CircleAvatar(
-                        foreground_image_src=f"data:image/jpeg;base64,{profile_b64}",
-                        radius=100,
-                    ),
-                    ft.Column([
-                        ft.Text("Martin Ndinelao", size=36, color=STAR_WHITE,
-                                weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                        ft.Text("Electrical Engineering Student — UNAM", size=16,
-                                color=AURORA1, font_family="Georgia"),
-                        ft.Text("Ongwediva, Namibia", size=13,
-                                color=MUTED, font_family="Georgia"),
+                ft.Container(
+                    content=ft.Row([
+                        ft.CircleAvatar(
+                            foreground_image_src=f"data:image/jpeg;base64,{profile_b64}",
+                            radius=80,
+                        ),
+                        ft.Column([
+                            ft.Text("Martin Ndinelao", size=36, color=STAR_WHITE,
+                                    weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                            ft.Text("Electrical Engineering Student — UNAM", size=16,
+                                    color=AURORA1, font_family="Georgia"),
+                            ft.Text("Ongwediva, Namibia", size=13,
+                                    color=MUTED, font_family="Georgia"),
+                            ft.Container(height=12),
+                            ft.Row([
+                                ft.Container(
+                                    content=ft.Text("View Projects", size=12,
+                                                    color=AURORA2,
+                                                    font_family="Courier New",
+                                                    weight=ft.FontWeight.BOLD),
+                                    padding=sym_pad(horizontal=16, vertical=8),
+                                    border=ft.Border.all(1, AURORA2),
+                                    border_radius=20,
+                                    ink=True,
+                                    on_click=lambda e: navigate("projects"),
+                                ),
+                                ft.Container(
+                                    content=ft.Text("View Experience", size=12,
+                                                    color=AURORA1,
+                                                    font_family="Courier New",
+                                                    weight=ft.FontWeight.BOLD),
+                                    padding=sym_pad(horizontal=16, vertical=8),
+                                    border=ft.Border.all(1, AURORA1),
+                                    border_radius=20,
+                                    ink=True,
+                                    on_click=lambda e: navigate("experience"),
+                                ),
+                            ], spacing=12),
+                        ], spacing=6, alignment=ft.MainAxisAlignment.CENTER),
+                    ], spacing=40, vertical_alignment=ft.CrossAxisAlignment.CENTER),
+                    height=300,
+                    alignment=ft.Alignment(-1, 0),
+                ),
+
+                star_divider(),
+                ft.Container(height=24),
+
+                ft.Text("About Me", size=22, color=STAR_WHITE,
+                        weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                ft.Container(height=12),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text(
+                            "I am a motivated and dedicated Electrical Engineering student "
+                            "with a strong passion for technology, innovation, and problem-solving. "
+                            "Through my academic studies and project work, I have developed a solid "
+                            "foundation in engineering principles while continuously seeking "
+                            "opportunities to expand my technical knowledge and practical skills. "
+                            "I enjoy analyzing challenges, finding effective solutions, and applying "
+                            "engineering concepts to real-world situations.",
+                            size=13, color=TEXT, font_family="Georgia",
+                        ),
                         ft.Container(height=12),
                         ft.Text(
-                            description_text,
+                            "I am a hardworking, adaptable, and goal-oriented individual with "
+                            "strong teamwork, communication, and organizational skills. I thrive "
+                            "in collaborative environments where I can contribute ideas, learn from "
+                            "others, and work toward shared objectives. My commitment to continuous "
+                            "learning drives me to stay curious, embrace new challenges, and improve "
+                            "both professionally and personally.",
                             size=13, color=TEXT, font_family="Georgia",
-                            expand=True,
                         ),
-                        ft.Container(height=16),
-                        ft.Row([
-                            ft.Container(
-                                content=ft.Text("View Projects", size=12,
-                                                color=AURORA2,
-                                                font_family="Courier New",
-                                                weight=ft.FontWeight.BOLD),
-                                padding=ft.padding.symmetric(horizontal=16, vertical=8),
-                                border=ft.border.all(1, AURORA2),
-                                border_radius=20,
-                                ink=True,
-                                on_click=lambda e: navigate("projects"),
-                            ),
-                        ], spacing=12),
-                    ], spacing=6),
-                ], spacing=40),
-                ft.Container(height=32),
-                star_divider(),
+                        ft.Container(height=12),
+                        ft.Text(
+                            "As an aspiring engineer, I am eager to gain valuable industry "
+                            "experience, apply my knowledge in practical settings, and contribute "
+                            "positively to projects that create meaningful impact. I am committed "
+                            "to excellence, professional growth, and developing innovative solutions "
+                            "that address modern engineering challenges.",
+                            size=13, color=TEXT, font_family="Georgia",
+                        ),
+                    ], spacing=0),
+                    bgcolor=CARD_BG,
+                    border_radius=16,
+                    padding=24,
+                    border=ft.Border.all(1, CARD_BORDER),
+                    expand=True,
+                ),
+
                 ft.Container(height=28),
-                ft.Text("Get in Touch", size=28, color=STAR_WHITE,
+                star_divider(),
+                ft.Container(height=24),
+
+                ft.Text("Get in Touch", size=22, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
                 ft.Row([
@@ -117,27 +170,106 @@ def main(page: ft.Page):
                     info_card("🐙", "GitHub",   "github.com/Annie43-man", AURORA3),
                     info_card("💼", "LinkedIn", "Martin Ndinelao",         GOLD),
                 ], spacing=12, expand=True),
+                ft.Container(height=24),
             ],
             spacing=12,
             scroll=ft.ScrollMode.AUTO,
         )
 
     def skills_page():
+        def skill_category(title, color, skills, height=150):
+            skill_chips = ft.Row(
+                controls=[
+                    ft.Container(
+                        content=ft.Text(skill, size=11, color=color,
+                                        font_family="Courier New",
+                                        weight=ft.FontWeight.BOLD),
+                        padding=sym_pad(horizontal=14, vertical=7),
+                        border=ft.Border.all(1, color),
+                        border_radius=20,
+                        bgcolor=CARD_BG,
+                    )
+                    for skill in skills
+                ],
+                spacing=8,
+                wrap=True,
+            )
+
+            return ft.Container(
+                content=ft.Column([
+                    ft.Text(title, size=16, color=STAR_WHITE,
+                            weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                    ft.Container(height=12),
+                    skill_chips,
+                ], spacing=4),
+                bgcolor=CARD_BG,
+                border_radius=16,
+                padding=24,
+                border=ft.Border.all(1, color),
+                expand=True,
+                height=height,
+            )
+
         return ft.Column(
             controls=[
                 ft.Text("Skills", size=42, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                ft.Text("Technical & Soft Skills", size=16,
+                        color=AURORA1, font_family="Georgia"),
                 ft.Container(height=8),
                 star_divider(),
+                ft.Container(height=24),
+                ft.Row([
+                    skill_category(
+                        title="💻 Programming Languages",
+                        color=AURORA1,
+                        skills=["Python", "JavaScript", "React Native"],
+                        height=160,
+                    ),
+                    skill_category(
+                        title="🛠️ Engineering Software",
+                        color=AURORA2,
+                        skills=["MATLAB", "LTspice", "AutoCAD",
+                                "MATLAB App Designer", "Simulink"],
+                        height=160,
+                    ),
+                ], spacing=16, expand=True),
                 ft.Container(height=16),
-                ft.Text("Coming soon...", size=13, color=MUTED,
-                        font_family="Georgia"),
+                ft.Row([
+                    skill_category(
+                        title="⚙️ Developer Tools",
+                        color=AURORA3,
+                        skills=["VS Code", "Git", "GitHub",
+                                "Expo", "Firebase", "React Native"],
+                        height=220,
+                    ),
+                    skill_category(
+                        title="🤝 Soft Skills",
+                        color=GOLD,
+                        skills=["Leadership", "Public Speaking", "Teamwork",
+                                "Project Management", "Communication",
+                                "Problem Solving", "Time Management"],
+                        height=220,
+                    ),
+                ], spacing=16, expand=True),
+                ft.Container(height=16),
+                ft.Row([
+                    skill_category(
+                        title="⚡ Electrical Engineering",
+                        color=AURORA1,
+                        skills=["Circuit Analysis", "AC/DC Power Systems",
+                                "RLC Circuit Design", "BJT & MOSFET Theory",
+                                "Analogue Electronics", "Three-Phase Systems",
+                                "Thévenin & Norton Theorems"],
+                        height=200,
+                    ),
+                ], spacing=16, expand=True),
             ],
-            spacing=12,
+            spacing=0,
             scroll=ft.ScrollMode.AUTO,
         )
 
-    def portfolio_page():
+    def projects_page():
         def project_card(title, role, description, tech_stack, color, github_url=None):
             tech_badges = ft.Row(
                 controls=[
@@ -145,8 +277,8 @@ def main(page: ft.Page):
                         content=ft.Text(tech, size=10, color=color,
                                         font_family="Courier New",
                                         weight=ft.FontWeight.BOLD),
-                        padding=ft.padding.symmetric(horizontal=10, vertical=4),
-                        border=ft.border.all(1, color),
+                        padding=sym_pad(horizontal=10, vertical=4),
+                        border=ft.Border.all(1, color),
                         border_radius=20,
                     )
                     for tech in tech_stack
@@ -173,8 +305,8 @@ def main(page: ft.Page):
                         content=ft.Text("View on GitHub", size=11,
                                         color=color, font_family="Courier New",
                                         weight=ft.FontWeight.BOLD),
-                        padding=ft.padding.symmetric(horizontal=14, vertical=7),
-                        border=ft.border.all(1, color),
+                        padding=sym_pad(horizontal=14, vertical=7),
+                        border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
                         on_click=lambda e, u=github_url: os.startfile(u),
@@ -186,13 +318,13 @@ def main(page: ft.Page):
                 bgcolor=CARD_BG,
                 border_radius=16,
                 padding=24,
-                border=ft.border.all(1, color),
+                border=ft.Border.all(1, color),
                 expand=True,
             )
 
         return ft.Column(
             controls=[
-                ft.Text("Portfolio", size=42, color=STAR_WHITE,
+                ft.Text("Projects", size=42, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Text("Things I've built", size=16,
                         color=AURORA1, font_family="Georgia"),
@@ -201,13 +333,13 @@ def main(page: ft.Page):
                 ft.Container(height=24),
                 project_card(
                     title="Fix-Flow — Water Leak Reporting App",
-                    role="Project Manager",
+                    role="Assistant Project Manager · Frontend Developer",
                     description=(
                         "A mobile app built for residents of Ongwediva to report water leaks "
-                        "and infrastructure issues in real time. Led a 16-member team as "
-                        "Project Assistant Manager and personally developed ReportScreen.js — the core "
-                        "home screen featuring a live leak counter, report submission, and "
-                        "emergency contact display."
+                        "and infrastructure issues in real time. Served as Assistant Project "
+                        "Manager in a 15-member team and personally developed ReportScreen.js "
+                        "— the core home screen featuring a live leak counter, report "
+                        "submission, and emergency contact display."
                     ),
                     tech_stack=["React Native", "Expo", "Firebase", "JavaScript"],
                     color=AURORA1,
@@ -264,8 +396,8 @@ def main(page: ft.Page):
                         content=ft.Text("View Certificate", size=11,
                                         color=color, font_family="Courier New",
                                         weight=ft.FontWeight.BOLD),
-                        padding=ft.padding.symmetric(horizontal=12, vertical=6),
-                        border=ft.border.all(1, color),
+                        padding=sym_pad(horizontal=12, vertical=6),
+                        border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
                         on_click=lambda e, f=filename: os.startfile(
@@ -276,8 +408,8 @@ def main(page: ft.Page):
                 bgcolor=CARD_BG,
                 border_radius=16,
                 padding=20,
-                border=ft.border.all(1, color),
-                width=340,
+                border=ft.Border.all(1, color),
+                expand=True,
             )
 
         cards = [make_card(n, d, f, c) for n, d, f, c in courses]
@@ -302,63 +434,373 @@ def main(page: ft.Page):
             scroll=ft.ScrollMode.AUTO,
         )
 
-    def projects_page():
+    def timeline_page():
+        def week_card(week, dates, phase, title, contributions, color):
+            bullet_items = [
+                ft.Row([
+                    ft.Container(width=6, height=6, bgcolor=color, border_radius=3),
+                    ft.Text(item, size=12, color=TEXT,
+                            font_family="Georgia", expand=True),
+                ], spacing=10)
+                for item in contributions
+            ]
+
+            return ft.Container(
+                content=ft.Column([
+                    ft.Row([
+                        ft.Container(
+                            content=ft.Text(f"Week {week}", size=11, color=color,
+                                            font_family="Courier New",
+                                            weight=ft.FontWeight.BOLD),
+                            padding=sym_pad(horizontal=12, vertical=5),
+                            border=ft.Border.all(1, color),
+                            border_radius=20,
+                        ),
+                        ft.Container(
+                            content=ft.Text(phase, size=10, color=MUTED,
+                                            font_family="Courier New",
+                                            weight=ft.FontWeight.BOLD),
+                            padding=sym_pad(horizontal=10, vertical=5),
+                            bgcolor=NEBULA,
+                            border_radius=20,
+                        ),
+                        ft.Text(dates, size=11, color=MUTED,
+                                font_family="Courier New"),
+                    ], spacing=10),
+                    ft.Container(height=8),
+                    ft.Text(title, size=15, color=STAR_WHITE,
+                            weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                    ft.Container(height=8),
+                    *bullet_items,
+                ], spacing=4),
+                bgcolor=CARD_BG,
+                border_radius=16,
+                padding=20,
+                border=ft.Border.all(1, color),
+            )
+
         return ft.Column(
             controls=[
-                ft.Text("Projects", size=42, color=STAR_WHITE,
+                ft.Text("Project Timeline", size=42, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                ft.Text("My individual journey through the semester", size=16,
+                        color=AURORA1, font_family="Georgia"),
                 ft.Container(height=8),
                 star_divider(),
-                ft.Container(height=16),
-                ft.Text("Coming soon...", size=13, color=MUTED,
-                        font_family="Georgia"),
+                ft.Container(height=24),
+
+                week_card(
+                    week="1–2", dates="02–13 Mar", phase="PHASE 0",
+                    title="Team Setup",
+                    contributions=[
+                        "Joined Group 13 as Assistant Project Manager",
+                        "Helped set up the GitHub repository",
+                        "Set up Expo + React Native + Firebase on my machine",
+                    ],
+                    color=MUTED,
+                ),
+                ft.Container(height=12),
+
+                week_card(
+                    week="3–4", dates="16–27 Mar", phase="PHASE 1",
+                    title="Pitch Week & Public Speaking",
+                    contributions=[
+                        "Contributed to pitching the Fix-Flow idea to Mr. Abisai",
+                        "Fix-Flow officially registered and approved",
+                        "Delivered motivational speech at Ruacana High School (13 Mar)",
+                    ],
+                    color=AURORA3,
+                ),
+                ft.Container(height=12),
+
+                week_card(
+                    week="5–8", dates="30 Mar–25 Apr", phase="PHASE 2",
+                    title="SRS & MATLAB Certificates",
+                    contributions=[
+                        "Helped complete and submit the SRS document",
+                        "Earned 5 MATLAB certificates during this phase",
+                    ],
+                    color=GOLD,
+                ),
+                ft.Container(height=12),
+
+                week_card(
+                    week="9–12", dates="27 Apr–30 May", phase="PHASE 3",
+                    title="ReportScreen Development",
+                    contributions=[
+                        "Developed ReportScreen.js — the main home screen of Fix-Flow",
+                        "PR #7 submitted and successfully merged",
+                        "Reviewed team pull requests and resolved merge conflicts",
+                        "Earned Simulink Onramp certificate (24 Apr)",
+                    ],
+                    color=AURORA2,
+                ),
+                ft.Container(height=12),
+
+                week_card(
+                    week="13", dates="01–06 Jun", phase="PHASE 4A",
+                    title="Live Demo",
+                    contributions=[
+                        "Part of the team that presented the live Expo demo to Mr. Abisai",
+                        "Submitted PR #20 with additional improvements",
+                    ],
+                    color=AURORA1,
+                ),
+                ft.Container(height=12),
+
+                week_card(
+                    week="14", dates="08–13 Jun", phase="PHASE 4B",
+                    title="Final Submission",
+                    contributions=[
+                        "Helped finalise and build the APK via Expo EAS",
+                        "Submitted this personal portfolio as final deliverable",
+                    ],
+                    color=GOLD,
+                ),
+
+                ft.Container(height=24),
             ],
-            spacing=12,
+            spacing=0,
             scroll=ft.ScrollMode.AUTO,
         )
 
     def blog_page():
+        VIDEO_PATH = os.path.join(base_dir, "reflection_video.mp4")
+
         return ft.Column(
             controls=[
                 ft.Text("Blog", size=42, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                ft.Text("Semester Project Reflection", size=16,
+                        color=AURORA1, font_family="Georgia"),
                 ft.Container(height=8),
                 star_divider(),
-                ft.Container(height=16),
-                ft.Text("Coming soon...", size=13, color=MUTED,
-                        font_family="Georgia"),
+                ft.Container(height=24),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Project Reflection Video", size=22,
+                                color=STAR_WHITE, weight=ft.FontWeight.BOLD,
+                                font_family="Georgia"),
+                        ft.Container(height=8),
+                        ft.Text(
+                            "Below is my individual semester project reflection video for "
+                            "Fix-Flow — a water leak reporting mobile app built for the "
+                            "residents of Ongwediva. The video details my specific contributions "
+                            "to the project as Assistant Project Manager and Frontend Developer.",
+                            size=13, color=TEXT, font_family="Georgia",
+                        ),
+                    ], spacing=4),
+                    bgcolor=CARD_BG,
+                    border_radius=16,
+                    padding=24,
+                    border=ft.Border.all(1, CARD_BORDER),
+                ),
+                ft.Container(height=20),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("▶  Reflection Video", size=14, color=AURORA1,
+                                font_family="Courier New",
+                                weight=ft.FontWeight.BOLD),
+                        ft.Container(height=12),
+                        ft.Container(
+                            content=ft.Text("▶  Open Video", size=12,
+                                            color=AURORA1, font_family="Courier New",
+                                            weight=ft.FontWeight.BOLD),
+                            padding=sym_pad(horizontal=16, vertical=8),
+                            border=ft.Border.all(1, AURORA1),
+                            border_radius=20,
+                            ink=True,
+                            on_click=lambda e: os.startfile(VIDEO_PATH),
+                        ),
+                        ft.Container(height=10),
+                        ft.Text(
+                            "Duration: ≤ 1 min 30 sec  ·  Individual contribution reflection",
+                            size=11, color=MUTED, font_family="Courier New",
+                        ),
+                    ], spacing=0),
+                    bgcolor=CARD_BG,
+                    border_radius=16,
+                    padding=24,
+                    border=ft.Border.all(1, AURORA1),
+                ),
+                ft.Container(height=20),
+                ft.Container(
+                    content=ft.Column([
+                        ft.Text("Written Summary", size=18, color=STAR_WHITE,
+                                weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                        ft.Container(height=10),
+                        ft.Text(
+                            "My primary contribution to Fix-Flow was the design and "
+                            "development of ReportScreen.js — the main home screen of the "
+                            "application. This screen gives residents a live view of active "
+                            "water leaks, a button to submit new reports, access to all "
+                            "existing reports, and emergency contact details.",
+                            size=13, color=TEXT, font_family="Georgia",
+                        ),
+                        ft.Container(height=10),
+                        ft.Text(
+                            "As Assistant Project Manager I also helped coordinate our "
+                            "15-member team: reviewing pull requests, resolving merge "
+                            "conflicts, and keeping the GitHub workflow running smoothly "
+                            "across the semester.",
+                            size=13, color=TEXT, font_family="Georgia",
+                        ),
+                    ], spacing=0),
+                    bgcolor=CARD_BG,
+                    border_radius=16,
+                    padding=24,
+                    border=ft.Border.all(1, CARD_BORDER),
+                ),
+                ft.Container(height=24),
             ],
             spacing=12,
             scroll=ft.ScrollMode.AUTO,
         )
 
     def experience_page():
+        def exp_card(title, role, period, description, color, details=None, screenshots=None):
+            controls = [
+                ft.Row([
+                    ft.Container(
+                        content=ft.Text(role, size=10, color=color,
+                                        font_family="Courier New",
+                                        weight=ft.FontWeight.BOLD),
+                        padding=sym_pad(horizontal=10, vertical=4),
+                        border=ft.Border.all(1, color),
+                        border_radius=20,
+                    ),
+                ]),
+                ft.Container(height=8),
+                ft.Text(title, size=20, color=STAR_WHITE,
+                        weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                ft.Text(period, size=11, color=MUTED,
+                        font_family="Courier New"),
+                ft.Container(height=10),
+                ft.Text(description, size=13, color=TEXT,
+                        font_family="Georgia"),
+            ]
+
+            if details:
+                controls.append(ft.Container(height=10))
+                for item in details:
+                    controls.append(
+                        ft.Row([
+                            ft.Container(
+                                width=6, height=6,
+                                bgcolor=color,
+                                border_radius=3,
+                            ),
+                            ft.Text(item, size=12, color=TEXT,
+                                    font_family="Georgia"),
+                        ], spacing=10)
+                    )
+
+            if screenshots:
+                controls.append(ft.Container(height=12))
+                controls.append(
+                    ft.Text("Screenshots", size=12, color=MUTED,
+                            font_family="Courier New",
+                            weight=ft.FontWeight.BOLD)
+                )
+                controls.append(ft.Container(height=8))
+                controls.append(
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                content=ft.Image(
+                                    src=os.path.join(base_dir, s),
+                                    width=320,
+                                    height=200,
+                                    border_radius=ft.BorderRadius.all(8),
+                                ),
+                                border=ft.Border.all(1, color),
+                                border_radius=ft.BorderRadius.all(8),
+                            )
+                            for s in screenshots
+                        ],
+                        spacing=12,
+                    )
+                )
+
+            return ft.Container(
+                content=ft.Column(controls=controls, spacing=4),
+                bgcolor=CARD_BG,
+                border_radius=16,
+                padding=24,
+                border=ft.Border.all(1, color),
+                expand=True,
+            )
+
         return ft.Column(
             controls=[
                 ft.Text("Experience", size=42, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                ft.Text("Leadership, projects & speaking", size=16,
+                        color=AURORA1, font_family="Georgia"),
                 ft.Container(height=8),
                 star_divider(),
+                ft.Container(height=24),
+                exp_card(
+                    title="Fix-Flow — Water Leak Reporting App",
+                    role="Assistant Project Manager · Frontend Developer",
+                    period="2026 — University of Namibia (UNAM)",
+                    description=(
+                        "Served as Assistant Project Manager in a 15-member development "
+                        "team building Fix-Flow, a mobile app that allows residents of "
+                        "Ongwediva to report water leaks and infrastructure issues in real "
+                        "time. Assisted in coordinating team efforts, managing Git workflow, "
+                        "reviewing pull requests, and ensuring timely delivery of the project."
+                    ),
+                    color=AURORA1,
+                    details=[
+                        "Contributed as part of a team of 15 developers",
+                        "Personally developed ReportScreen.js — the core home screen",
+                        "Assisted in managing GitHub repo, pull requests and merge conflicts",
+                        "Tech stack: React Native, Expo, Firebase, JavaScript",
+                    ],
+                    screenshots=["ReportScreen.png"],
+                ),
                 ft.Container(height=16),
-                ft.Text("Coming soon...", size=13, color=MUTED,
-                        font_family="Georgia"),
-            ],
-            spacing=12,
-            scroll=ft.ScrollMode.AUTO,
-        )
-
-    def timeline_page():
-        return ft.Column(
-            controls=[
-                ft.Text("Project Timeline", size=42, color=STAR_WHITE,
-                        weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                ft.Container(height=8),
-                star_divider(),
+                exp_card(
+                    title="MATLAB GUI Calculator",
+                    role="Solo Developer",
+                    period="2026 — University of Namibia (UNAM)",
+                    description=(
+                        "Designed and built a desktop GUI calculator using MATLAB App "
+                        "Designer as part of coursework. The app features two tabs covering "
+                        "Ohm's Law & Power calculations and RLC Impedance analysis, styled "
+                        "with a custom Midnight Galaxy dark theme."
+                    ),
+                    color=AURORA2,
+                    details=[
+                        "Tab 1: Ohm's Law and Power calculations",
+                        "Tab 2: RLC Impedance analysis",
+                        "Custom Midnight Galaxy dark theme design",
+                        "Built independently using MATLAB App Designer",
+                    ],
+                    screenshots=["matlab_calc_1.png", "matlab_calc_2.png"],
+                ),
                 ft.Container(height=16),
-                ft.Text("Coming soon...", size=13, color=MUTED,
-                        font_family="Georgia"),
+                exp_card(
+                    title="Motivational Speaker — Annual Awards Ceremony",
+                    role="Public Speaker",
+                    period="13 March 2026 — Ruacana High School, Ruacana",
+                    description=(
+                        "Invited to deliver a motivational speech at Ruacana High School's "
+                        "Annual Award Giving Ceremony. Addressed the full school body of "
+                        "learners, sharing insights on university life and encouraging "
+                        "students to work hard and pursue their academic goals."
+                    ),
+                    color=AURORA3,
+                    details=[
+                        "Spoke to the full Ruacana High School learner body",
+                        "Shared personal experience of university life at UNAM",
+                        "Encouraged learners to study hard and aim for higher education",
+                        "Annual Award Giving Ceremony — 13 March 2026",
+                    ],
+                ),
             ],
-            spacing=12,
+            spacing=0,
             scroll=ft.ScrollMode.AUTO,
         )
 
@@ -375,6 +817,7 @@ def main(page: ft.Page):
                 ft.Text("Pull Requests", size=28, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
+
                 ft.Container(
                     content=ft.Column([
                         ft.Text("PR #7 — feat: describe your changes", size=14,
@@ -390,11 +833,19 @@ def main(page: ft.Page):
                             "Reports button, emergency contact display, and full stylesheet.",
                             size=13, color=TEXT, font_family="Georgia",
                         ),
+                        ft.Container(height=12),
+                        ft.Image(
+                            src=os.path.join(base_dir, "PR#7.png"),
+                            width=700,
+                            border_radius=ft.BorderRadius.all(8),
+                        ),
                     ], spacing=4),
                     bgcolor=CARD_BG, border_radius=16, padding=20,
-                    border=ft.border.all(1, AURORA1), expand=True,
+                    border=ft.Border.all(1, AURORA1), expand=True,
                 ),
+
                 ft.Container(height=12),
+
                 ft.Container(
                     content=ft.Column([
                         ft.Text("PR #20 — Feature/your feature name", size=14,
@@ -409,50 +860,72 @@ def main(page: ft.Page):
                             "and improvements made to the project.",
                             size=13, color=TEXT, font_family="Georgia",
                         ),
+                        ft.Container(height=12),
+                        ft.Image(
+                            src=os.path.join(base_dir, "PR# 20.png"),
+                            width=700,
+                            border_radius=ft.BorderRadius.all(8),
+                        ),
+                        ft.Container(height=12),
+                        ft.Image(
+                            src=os.path.join(base_dir, "PR#20-2.png"),
+                            width=700,
+                            border_radius=ft.BorderRadius.all(8),
+                        ),
                     ], spacing=4),
                     bgcolor=CARD_BG, border_radius=16, padding=20,
-                    border=ft.border.all(1, AURORA3), expand=True,
+                    border=ft.Border.all(1, AURORA3), expand=True,
                 ),
+
                 ft.Container(height=24),
                 ft.Text("Impact Summary", size=28, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
+
                 ft.Container(
                     content=ft.Column([
                         ft.Text(
-                            "As Project Assistant Manager for Group 13, I coordinated team efforts "
-                            "and ensured individual contributions were tracked and merged "
-                            "correctly. My direct code contribution was the ReportScreen.js "
-                            "- the core home screen of the Fix-Flow app, which allows "
-                            "residents of Ongwediva to report and view water leaks and "
-                            "active infrastructure issues.",
+                            "As Assistant Project Manager for Group 13, I coordinated team "
+                            "efforts and ensured individual contributions were tracked and "
+                            "merged correctly. My direct code contribution was the "
+                            "ReportScreen.js - the core home screen of the Fix-Flow app, "
+                            "which allows residents of Ongwediva to report and view water "
+                            "leaks and active infrastructure issues.",
                             size=13, color=TEXT, font_family="Georgia",
+                        ),
+                        ft.Container(height=16),
+                        ft.Text("Top Contributors Graph", size=14, color=GOLD,
+                                font_family="Courier New", weight=ft.FontWeight.BOLD),
+                        ft.Container(height=8),
+                        ft.Image(
+                            src=os.path.join(base_dir, "TOP-COMMITERS GRAPH.png"),
+                            width=700,
+                            border_radius=ft.BorderRadius.all(8),
                         ),
                     ], spacing=4),
                     bgcolor=CARD_BG, border_radius=16, padding=20,
-                    border=ft.border.all(1, GOLD), expand=True,
+                    border=ft.Border.all(1, GOLD), expand=True,
                 ),
+
+                ft.Container(height=24),
             ],
             spacing=12,
             scroll=ft.ScrollMode.AUTO,
         )
 
-    # ── Content area ─────────────────────────────
     content_area = ft.Container(
-        content=about_page(),
+        content=home_page(),
         expand=True,
         padding=40,
         bgcolor=BG,
     )
 
-    # ── Nav ───────────────────────────────────────
     nav_buttons = {}
 
     def navigate(route):
         pages = {
-            "about":      about_page(),
+            "about":      home_page(),
             "skills":     skills_page(),
-            "portfolio":  portfolio_page(),
             "timeline":   timeline_page(),
             "projects":   projects_page(),
             "blog":       blog_page(),
@@ -463,14 +936,12 @@ def main(page: ft.Page):
         content_area.content = pages[route]
         for r, btn in nav_buttons.items():
             if r == route:
-                btn.border         = ft.border.only(
-                    bottom=ft.BorderSide(2, AURORA1))
-                btn.content.color  = AURORA1
+                btn.border        = ft.Border.only(bottom=ft.BorderSide(2, AURORA1))
+                btn.content.color = AURORA1
                 btn.content.weight = ft.FontWeight.BOLD
             else:
-                btn.border         = ft.border.only(
-                    bottom=ft.BorderSide(2, "transparent"))
-                btn.content.color  = MUTED
+                btn.border        = ft.Border.only(bottom=ft.BorderSide(2, "transparent"))
+                btn.content.color = MUTED
                 btn.content.weight = ft.FontWeight.NORMAL
         page.update()
 
@@ -478,16 +949,15 @@ def main(page: ft.Page):
         btn = ft.Container(
             content=ft.Text(label, size=12, color=MUTED,
                             font_family="Georgia"),
-            padding=ft.padding.symmetric(horizontal=10, vertical=12),
+            padding=sym_pad(horizontal=10, vertical=12),
             bgcolor="transparent",
-            border=ft.border.only(bottom=ft.BorderSide(2, "transparent")),
+            border=ft.Border.only(bottom=ft.BorderSide(2, "transparent")),
             ink=True,
             on_click=lambda e, r=route: navigate(r),
         )
         nav_buttons[route] = btn
         return btn
 
-    # ── Top navbar ───────────────
     navbar = ft.Container(
         content=ft.Row(
             controls=[
@@ -495,9 +965,8 @@ def main(page: ft.Page):
                         weight=ft.FontWeight.BOLD, font_family="Courier New"),
                 ft.Row(
                     controls=[
-                        make_nav_btn("About",      "about"),
+                        make_nav_btn("Home",      "about"),
                         make_nav_btn("Skills",     "skills"),
-                        make_nav_btn("Portfolio",  "portfolio"),
                         make_nav_btn("Timeline",   "timeline"),
                         make_nav_btn("Projects",   "projects"),
                         make_nav_btn("Blog",       "blog"),
@@ -511,8 +980,8 @@ def main(page: ft.Page):
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
         ),
         bgcolor=NEBULA,
-        padding=ft.padding.symmetric(horizontal=32, vertical=0),
-        border=ft.border.only(bottom=ft.BorderSide(1, CARD_BORDER)),
+        padding=sym_pad(horizontal=32, vertical=0),
+        border=ft.Border.only(bottom=ft.BorderSide(1, CARD_BORDER)),
     )
 
     navigate("about")
