@@ -75,15 +75,14 @@ web_portfolio/
 
 | Page | Status |
 |------|--------|
-| About | ✅ Complete |
-| Skills | 🔧 Coming soon |
-| Portfolio | ✅ Complete |
-| Timeline | 🔧 Coming soon |
-| Projects | 🔧 Coming soon |
-| Blog | 🔧 Coming soon |
-| Experience | 🔧 Coming soon |
-| MATLAB Hub | ✅ Complete |
-| GitHub Evidence | ✅ Complete |
+| Home | Complete |
+| Skills |Complete  |
+| Timeline | Complete |
+| Projects | Complete |
+| Blog | Complete |
+| Experience | Complete |
+| MATLAB Hub | Complete |
+| GitHub Evidence | Complete |
 
 ---
 
