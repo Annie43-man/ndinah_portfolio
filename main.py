@@ -1,5 +1,6 @@
 import flet as ft
 import flet_video as fv
+import flet_webview as fwv
 import os
 import base64
 
@@ -354,28 +355,29 @@ def main(page: ft.Page):
             ("Machine Learning Onramp",                  "18 April 2026", "https://drive.google.com/file/d/1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp/preview", AURORA2),
             ("Simulink Onramp",                          "24 April 2026", "https://drive.google.com/file/d/1FkjknSGWrJISwW3jufVsYoTj4i11cHDU/preview", AURORA3),
         ]
-        def open_pdf(url, name):
-            def close(e):
-                dialog.open = False
-                page.update()
 
-            dialog = ft.AlertDialog(
-                modal=True,
-                bgcolor=CARD_BG,
-                shape=ft.RoundedRectangleBorder(radius=16),
-                title=ft.Row([
-                    ft.Text(name, size=13, color=STAR_WHITE,
-                            font_family="Georgia", expand=True),
-                    ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED, on_click=close),
+        viewer = ft.Container(visible=False)
+
+        def open_pdf(url, name, color):
+            viewer.content = ft.Column([
+                ft.Row([
+                    ft.Text(name, size=14, color=STAR_WHITE,
+                            font_family="Georgia", weight=ft.FontWeight.BOLD, expand=True),
+                    ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED,
+                                  on_click=lambda e: close_viewer()),
                 ]),
-                content=ft.Container(
-                    content=ft.HtmlIframe(src=url, width=820, height=560),
-                    width=820,
-                    height=560,
-                ),
-            )
-            page.overlay.append(dialog)
-            dialog.open = True
+                ft.Container(height=10),
+                fwv.WebView(url=url, width=800, height=560),
+            ], spacing=0)
+            viewer.bgcolor = CARD_BG
+            viewer.border_radius = 16
+            viewer.padding = 20
+            viewer.border = ft.Border.all(1, color)
+            viewer.visible = True
+            page.update()
+
+        def close_viewer(e=None):
+            viewer.visible = False
             page.update()
 
         def make_card(name, date, url, color):
@@ -393,7 +395,7 @@ def main(page: ft.Page):
                         border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
-                        on_click=lambda e, u=url, n=name: open_pdf(u, n),
+                        on_click=lambda e, u=url, n=name, c=color: open_pdf(u, n, c),
                     ),
                 ], spacing=6),
                 bgcolor=CARD_BG,
@@ -413,6 +415,8 @@ def main(page: ft.Page):
                         color=AURORA1, font_family="Georgia"),
                 ft.Container(height=8),
                 star_divider(),
+                ft.Container(height=16),
+                viewer,
                 ft.Container(height=16),
                 ft.Column(controls=[
                     ft.Row(controls=cards[0:2], spacing=16),
