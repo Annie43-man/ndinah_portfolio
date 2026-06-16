@@ -1,6 +1,5 @@
 import flet as ft
 import flet_video as fv
-import flet_webview as fwv
 import os
 import base64
 
@@ -23,10 +22,6 @@ STAR_WHITE  = "#f0eeff"
 
 def sym_pad(horizontal=0, vertical=0):
     return ft.Padding.symmetric(horizontal=horizontal, vertical=vertical)
-
-def drive_embed(file_id):
-    drive_url = f"https://drive.google.com/file/d/{file_id}/view"
-    return f"https://docs.google.com/viewer?url={drive_url}&embedded=true"
 
 def main(page: ft.Page):
     page.bgcolor = "#03010a"
@@ -360,30 +355,9 @@ def main(page: ft.Page):
             ("Simulink Onramp",                          "24 April 2026", "1FkjknSGWrJISwW3jufVsYoTj4i11cHDU", AURORA3),
         ]
 
-        viewer = ft.Container(visible=False)
-
-        def open_pdf(file_id, name, color):
-            url = drive_embed(file_id)
-            viewer.content = ft.Column([
-                ft.Row([
-                    ft.Text(name, size=14, color=STAR_WHITE,
-                            font_family="Georgia", weight=ft.FontWeight.BOLD, expand=True),
-                    ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED,
-                                  on_click=lambda e: close_viewer()),
-                ]),
-                ft.Container(height=10),
-                fwv.WebView(url=url, width=800, height=560),
-            ], spacing=0)
-            viewer.bgcolor = CARD_BG
-            viewer.border_radius = 16
-            viewer.padding = 20
-            viewer.border = ft.Border.all(1, color)
-            viewer.visible = True
-            page.update()
-
-        def close_viewer(e=None):
-            viewer.visible = False
-            page.update()
+        def open_cert(file_id):
+            url = f"https://drive.google.com/file/d/{file_id}/view"
+            page.launch_url(url)
 
         def make_card(name, date, file_id, color):
             return ft.Container(
@@ -400,7 +374,7 @@ def main(page: ft.Page):
                         border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
-                        on_click=lambda e, fid=file_id, n=name, c=color: open_pdf(fid, n, c),
+                        on_click=lambda e, fid=file_id: open_cert(fid),
                     ),
                 ], spacing=6),
                 bgcolor=CARD_BG,
@@ -421,12 +395,10 @@ def main(page: ft.Page):
                 ft.Container(height=8),
                 star_divider(),
                 ft.Container(height=16),
-                viewer,
-                ft.Container(height=16),
                 ft.Column(controls=[
                     ft.Row(controls=cards[0:2], spacing=16),
                     ft.Row(controls=cards[2:4], spacing=16),
-                    ft.Row(controls=cards[4:6], spacing=16),
+                    ft.Row(controls=cards[4:6],acing=16),
                     ft.Row(controls=cards[6:],  spacing=16),
                 ], spacing=16),
             ],
