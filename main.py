@@ -356,8 +356,8 @@ def main(page: ft.Page):
         ]
 
         def open_cert(file_id):
-            url = f"https://drive.google.com/file/d/{file_id}/view"
-            page.launch_url(url)
+            url = f"https://drive.google.com/file/d/{file_id}/view?usp=sharing"
+            page.launch_url(url, web_window_name="_blank")
 
         def make_card(name, date, file_id, color):
             return ft.Container(
