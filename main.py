@@ -346,17 +346,65 @@ def main(page: ft.Page):
 
     def matlab_page():
         courses = [
-            ("MATLAB Onramp",                            "3 March 2026",  "1q7-d7p14utH42EZ7JfguIwE2_Sx32I-L", AURORA1),
-            ("Calculations with Vectors and Matrices",   "6 March 2026",  "1_jOFafOH0w8Dagq7lW60x21NNiX5a8vD", AURORA2),
-            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "1P2tEwFmffLezYaPFDYqEEVeQ097Br0-2", AURORA3),
-            ("Make and Manipulate Matrices",             "20 March 2026", "1PuA_DQMcUxkTC4Yw25Um6k6wpn8wkVRN", GOLD),
-            ("Explore Data with MATLAB Plots",           "20 March 2026", "13CIFmY0O_K0Afd7e1Cq5Wo3mdTq5Zt0J", AURORA1),
-            ("Machine Learning Onramp",                  "18 April 2026", "1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp", AURORA2),
-            ("Simulink Onramp",                          "24 April 2026", "1FkjknSGWrJISwW3jufVsYoTj4i11cHDU", AURORA3),
+            ("MATLAB Onramp",                            "3 March 2026",  "certificate-preview-Matlab-Onramp.png", AURORA1),
+            ("Calculations with Vectors and Matrices",   "6 March 2026",  "certificate-preview-Calculation-with-Vectors-and-Matrices.png", AURORA2),
+            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "certificate-preview-MATLAB-Desktop-Tools-and-Troubleshooting-Scripts.png", AURORA3),
+            ("Make and Manipulate Matrices",             "20 March 2026", "certificate-preview-Make-and-Manipulate-Matrices.png", GOLD),
+            ("Explore Data with MATLAB Plots",           "20 March 2026", "certificate-preview-Explore-Data-with-MATLAB-Plots.png", AURORA1),
+            ("Machine Learning Onramp",                  "18 April 2026", "certificate-preview-Machine-Learning-Onramp.png", AURORA2),
+            ("Simulink Onramp",                          "24 April 2026", "certificate-preview-Simulink-Onramp.png", AURORA3),
         ]
 
-        def make_card(name, date, file_id, color):
-           url = f"https://drive.google.com/file/d/{file_id}/view?usp=sharing"
+        def show_certificate(name, certificate_image):
+           page.show_dialog(
+               ft.AlertDialog(
+                   modal=True,
+                   bgcolor=CARD_BG,
+                   barrier_color="#03010acc",
+                   inset_padding=20,
+                   title=ft.Row(
+                       controls=[
+                           ft.Text(
+                               name,
+                               size=18,
+                               color=STAR_WHITE,
+                               weight=ft.FontWeight.BOLD,
+                               font_family="Georgia",
+                               expand=True,
+                           ),
+                           ft.IconButton(
+                               icon=ft.Icons.CLOSE,
+                               icon_color=MUTED,
+                               tooltip="Close",
+                               on_click=lambda e: page.pop_dialog(),
+                           ),
+                       ],
+                       alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+                   ),
+                   content=ft.Container(
+                       content=ft.Column(
+                           controls=[
+                               ft.Image(
+                                   src=certificate_image,
+                                   fit=ft.BoxFit.CONTAIN,
+                                   expand=True,
+                               ),
+                           ],
+                           scroll=ft.ScrollMode.AUTO,
+                       ),
+                       width=900,
+                       height=650,
+                       bgcolor=BG,
+                       border=ft.Border.all(1, CARD_BORDER),
+                       border_radius=8,
+                       clip_behavior=ft.ClipBehavior.HARD_EDGE,
+                   ),
+                   content_padding=16,
+                   actions=[],
+               )
+           )
+
+        def make_card(name, date, certificate_image, color):
            return ft.Container(
              content=ft.Column([
                  ft.Text(name, size=14, color=STAR_WHITE,
@@ -367,7 +415,7 @@ def main(page: ft.Page):
                      content=ft.Text("View Certificate", size=11, color=color,
                                      font_family="Courier New",
                                      weight=ft.FontWeight.BOLD),
-                    url=url,
+                    on_click=lambda e, n=name, img=certificate_image: show_certificate(n, img),
                     ),
                     
         ], spacing=6),
@@ -378,7 +426,7 @@ def main(page: ft.Page):
         expand=True,
     )
 
-        cards = [make_card(n, d, fid, c) for n, d, fid, c in courses]
+        cards = [make_card(n, d, certificate_image, c) for n, d, certificate_image, c in courses]
 
         return ft.Column(
             controls=[
