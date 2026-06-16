@@ -1,5 +1,6 @@
 import flet as ft
 import flet_video as fv
+import flet_webview as fwv
 import os
 import base64
 
@@ -386,6 +387,34 @@ def main(page: ft.Page):
             ("Simulink Onramp",                          "24 April 2026", "Simulink-Onramp.pdf",                                AURORA3),
         ]
 
+        def open_pdf(filename):
+            def close(e):
+                dialog.open = False
+                page.update()
+
+            dialog = ft.AlertDialog(
+                modal=True,
+                bgcolor=CARD_BG,
+                shape=ft.RoundedRectangleBorder(radius=16),
+                title=ft.Row([
+                    ft.Text(filename.replace(".pdf", "").replace("-", " "),
+                            size=13, color=STAR_WHITE,
+                            font_family="Georgia", expand=True),
+                    ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED, on_click=close),
+                ]),
+                content=ft.Container(
+                    content=fwv.WebView(
+                        url=f"/{filename}",
+                        expand=True,
+                    ),
+                    width=820,
+                    height=600,
+                ),
+            )
+            page.overlay.append(dialog)
+            dialog.open = True
+            page.update()
+
         def make_card(name, date, filename, color):
             return ft.Container(
                 content=ft.Column([
@@ -401,7 +430,7 @@ def main(page: ft.Page):
                         border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
-                        on_click=lambda e, f=filename: page.launch_url(f"/{f}"),
+                        on_click=lambda e, f=filename: open_pdf(f),
                     ),
                 ], spacing=6),
                 bgcolor=CARD_BG,
