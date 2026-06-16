@@ -354,7 +354,6 @@ def main(page: ft.Page):
             ("Machine Learning Onramp",                  "18 April 2026", "https://drive.google.com/file/d/1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp/preview", AURORA2),
             ("Simulink Onramp",                          "24 April 2026", "https://drive.google.com/file/d/1FkjknSGWrJISwW3jufVsYoTj4i11cHDU/preview", AURORA3),
         ]
-
         def open_pdf(url, name):
             def close(e):
                 dialog.open = False
