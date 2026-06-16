@@ -398,7 +398,7 @@ def main(page: ft.Page):
                 ft.Column(controls=[
                     ft.Row(controls=cards[0:2], spacing=16),
                     ft.Row(controls=cards[2:4], spacing=16),
-                    ft.Row(controls=cards[4:6],acing=16),
+                    ft.Row(controls=cards[4:6], spacing=16),
                     ft.Row(controls=cards[6:],  spacing=16),
                 ], spacing=16),
             ],
