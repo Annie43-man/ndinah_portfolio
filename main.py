@@ -109,10 +109,8 @@ def main(page: ft.Page):
                     height=300,
                     alignment=ft.Alignment(-1, 0),
                 ),
-
                 star_divider(),
                 ft.Container(height=24),
-
                 ft.Text("About Me", size=22, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
@@ -154,11 +152,9 @@ def main(page: ft.Page):
                     border=ft.Border.all(1, CARD_BORDER),
                     expand=True,
                 ),
-
                 ft.Container(height=28),
                 star_divider(),
                 ft.Container(height=24),
-
                 ft.Text("Get in Touch", size=22, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Container(height=12),
@@ -195,7 +191,6 @@ def main(page: ft.Page):
                 spacing=8,
                 wrap=True,
             )
-
             return ft.Container(
                 content=ft.Column([
                     ft.Text(title, size=16, color=STAR_WHITE,
@@ -221,49 +216,27 @@ def main(page: ft.Page):
                 star_divider(),
                 ft.Container(height=24),
                 ft.Row([
-                    skill_category(
-                        title="💻 Programming Languages",
-                        color=AURORA1,
-                        skills=["Python", "JavaScript", "React Native"],
-                        height=160,
-                    ),
-                    skill_category(
-                        title="🛠️ Engineering Software",
-                        color=AURORA2,
-                        skills=["MATLAB", "LTspice", "AutoCAD",
-                                "MATLAB App Designer", "Simulink"],
-                        height=160,
-                    ),
+                    skill_category("💻 Programming Languages", AURORA1,
+                                   ["Python", "JavaScript", "React Native"], 160),
+                    skill_category("🛠️ Engineering Software", AURORA2,
+                                   ["MATLAB", "LTspice", "AutoCAD", "MATLAB App Designer", "Simulink"], 160),
                 ], spacing=16, expand=True),
                 ft.Container(height=16),
                 ft.Row([
-                    skill_category(
-                        title="⚙️ Developer Tools",
-                        color=AURORA3,
-                        skills=["VS Code", "Git", "GitHub",
-                                "Expo", "Firebase", "React Native"],
-                        height=220,
-                    ),
-                    skill_category(
-                        title="🤝 Soft Skills",
-                        color=GOLD,
-                        skills=["Leadership", "Public Speaking", "Teamwork",
-                                "Project Management", "Communication",
-                                "Problem Solving", "Time Management"],
-                        height=220,
-                    ),
+                    skill_category("⚙️ Developer Tools", AURORA3,
+                                   ["VS Code", "Git", "GitHub", "Expo", "Firebase", "React Native"], 220),
+                    skill_category("🤝 Soft Skills", GOLD,
+                                   ["Leadership", "Public Speaking", "Teamwork",
+                                    "Project Management", "Communication",
+                                    "Problem Solving", "Time Management"], 220),
                 ], spacing=16, expand=True),
                 ft.Container(height=16),
                 ft.Row([
-                    skill_category(
-                        title="⚡ Electrical Engineering",
-                        color=AURORA1,
-                        skills=["Circuit Analysis", "AC/DC Power Systems",
-                                "RLC Circuit Design", "BJT & MOSFET Theory",
-                                "Analogue Electronics", "Three-Phase Systems",
-                                "Thévenin & Norton Theorems"],
-                        height=200,
-                    ),
+                    skill_category("⚡ Electrical Engineering", AURORA1,
+                                   ["Circuit Analysis", "AC/DC Power Systems",
+                                    "RLC Circuit Design", "BJT & MOSFET Theory",
+                                    "Analogue Electronics", "Three-Phase Systems",
+                                    "Thévenin & Norton Theorems"], 200),
                 ], spacing=16, expand=True),
             ],
             spacing=0,
@@ -286,25 +259,22 @@ def main(page: ft.Page):
                 ],
                 spacing=6,
             )
-
             controls = [
                 ft.Text(title, size=18, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
                 ft.Text(role, size=11, color=color,
                         font_family="Courier New", weight=ft.FontWeight.BOLD),
                 ft.Container(height=8),
-                ft.Text(description, size=13, color=TEXT,
-                        font_family="Georgia"),
+                ft.Text(description, size=13, color=TEXT, font_family="Georgia"),
                 ft.Container(height=12),
                 tech_badges,
             ]
-
             if github_url:
                 controls.append(ft.Container(height=12))
                 controls.append(
                     ft.Container(
-                        content=ft.Text("View on GitHub", size=11,
-                                        color=color, font_family="Courier New",
+                        content=ft.Text("View on GitHub", size=11, color=color,
+                                        font_family="Courier New",
                                         weight=ft.FontWeight.BOLD),
                         padding=sym_pad(horizontal=14, vertical=7),
                         border=ft.Border.all(1, color),
@@ -313,7 +283,6 @@ def main(page: ft.Page):
                         on_click=lambda e, u=github_url: page.launch_url(u),
                     )
                 )
-
             return ft.Container(
                 content=ft.Column(controls=controls, spacing=4),
                 bgcolor=CARD_BG,
@@ -375,87 +344,88 @@ def main(page: ft.Page):
             scroll=ft.ScrollMode.AUTO,
         )
 
-def matlab_page():
-    courses = [
-        ("MATLAB Onramp",                            "3 March 2026",  "https://drive.google.com/file/d/1q7-d7p14utH42EZ7JfguIwE2_Sx32I-L/preview", AURORA1),
-        ("Calculations with Vectors and Matrices",   "6 March 2026",  "https://drive.google.com/file/d/1_jOFafOH0w8Dagq7lW60x21NNiX5a8vD/preview", AURORA2),
-        ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "https://drive.google.com/file/d/1P2tEwFmffLezYaPFDYqEEVeQ097Br0-2/preview", AURORA3),
-        ("Make and Manipulate Matrices",             "20 March 2026", "https://drive.google.com/file/d/1PuA_DQMcUxkTC4Yw25Um6k6wpn8wkVRN/preview", GOLD),
-        ("Explore Data with MATLAB Plots",           "20 March 2026", "https://drive.google.com/file/d/13CIFmY0O_K0Afd7e1Cq5Wo3mdTq5Zt0J/preview", AURORA1),
-        ("Machine Learning Onramp",                  "18 April 2026", "https://drive.google.com/file/d/1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp/preview", AURORA2),
-        ("Simulink Onramp",                          "24 April 2026", "https://drive.google.com/file/d/1FkjknSGWrJISwW3jufVsYoTj4i11cHDU/preview", AURORA3),
-    ]
+    def matlab_page():
+        courses = [
+            ("MATLAB Onramp",                            "3 March 2026",  "https://drive.google.com/file/d/1q7-d7p14utH42EZ7JfguIwE2_Sx32I-L/preview", AURORA1),
+            ("Calculations with Vectors and Matrices",   "6 March 2026",  "https://drive.google.com/file/d/1_jOFafOH0w8Dagq7lW60x21NNiX5a8vD/preview", AURORA2),
+            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "https://drive.google.com/file/d/1P2tEwFmffLezYaPFDYqEEVeQ097Br0-2/preview", AURORA3),
+            ("Make and Manipulate Matrices",             "20 March 2026", "https://drive.google.com/file/d/1PuA_DQMcUxkTC4Yw25Um6k6wpn8wkVRN/preview", GOLD),
+            ("Explore Data with MATLAB Plots",           "20 March 2026", "https://drive.google.com/file/d/13CIFmY0O_K0Afd7e1Cq5Wo3mdTq5Zt0J/preview", AURORA1),
+            ("Machine Learning Onramp",                  "18 April 2026", "https://drive.google.com/file/d/1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp/preview", AURORA2),
+            ("Simulink Onramp",                          "24 April 2026", "https://drive.google.com/file/d/1FkjknSGWrJISwW3jufVsYoTj4i11cHDU/preview", AURORA3),
+        ]
 
-    def open_pdf(url, name):
-        def close(e):
-            dialog.open = False
+        def open_pdf(url, name):
+            def close(e):
+                dialog.open = False
+                page.update()
+
+            dialog = ft.AlertDialog(
+                modal=True,
+                bgcolor=CARD_BG,
+                shape=ft.RoundedRectangleBorder(radius=16),
+                title=ft.Row([
+                    ft.Text(name, size=13, color=STAR_WHITE,
+                            font_family="Georgia", expand=True),
+                    ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED, on_click=close),
+                ]),
+                content=ft.Container(
+                    content=ft.HtmlIframe(src=url, width=820, height=560),
+                    width=820,
+                    height=560,
+                ),
+            )
+            page.overlay.append(dialog)
+            dialog.open = True
             page.update()
 
-        dialog = ft.AlertDialog(
-            modal=True,
-            bgcolor=CARD_BG,
-            shape=ft.RoundedRectangleBorder(radius=16),
-            title=ft.Row([
-                ft.Text(name, size=13, color=STAR_WHITE,
-                        font_family="Georgia", expand=True),
-                ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED, on_click=close),
-            ]),
-            content=ft.Container(
-                content=ft.HtmlIframe(src=url, width=820, height=560),
-                width=820,
-                height=560,
-            ),
-        )
-        page.overlay.append(dialog)
-        dialog.open = True
-        page.update()
+        def make_card(name, date, url, color):
+            return ft.Container(
+                content=ft.Column([
+                    ft.Text(name, size=14, color=STAR_WHITE,
+                            weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                    ft.Text(date, size=11, color=MUTED, font_family="Georgia"),
+                    ft.Container(height=8),
+                    ft.Container(
+                        content=ft.Text("View Certificate", size=11,
+                                        color=color, font_family="Courier New",
+                                        weight=ft.FontWeight.BOLD),
+                        padding=sym_pad(horizontal=12, vertical=6),
+                        border=ft.Border.all(1, color),
+                        border_radius=20,
+                        ink=True,
+                        on_click=lambda e, u=url, n=name: open_pdf(u, n),
+                    ),
+                ], spacing=6),
+                bgcolor=CARD_BG,
+                border_radius=16,
+                padding=20,
+                border=ft.Border.all(1, color),
+                expand=True,
+            )
 
-    def make_card(name, date, url, color):
-        return ft.Container(
-            content=ft.Column([
-                ft.Text(name, size=14, color=STAR_WHITE,
+        cards = [make_card(n, d, u, c) for n, d, u, c in courses]
+
+        return ft.Column(
+            controls=[
+                ft.Text("MATLAB Achievement Hub", size=42, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                ft.Text(date, size=11, color=MUTED, font_family="Georgia"),
+                ft.Text("7 / 7 courses completed", size=16,
+                        color=AURORA1, font_family="Georgia"),
                 ft.Container(height=8),
-                ft.Container(
-                    content=ft.Text("View Certificate", size=11,
-                                    color=color, font_family="Courier New",
-                                    weight=ft.FontWeight.BOLD),
-                    padding=sym_pad(horizontal=12, vertical=6),
-                    border=ft.Border.all(1, color),
-                    border_radius=20,
-                    ink=True,
-                    on_click=lambda e, u=url, n=name: open_pdf(u, n),
-                ),
-            ], spacing=6),
-            bgcolor=CARD_BG,
-            border_radius=16,
-            padding=20,
-            border=ft.Border.all(1, color),
-            expand=True,
+                star_divider(),
+                ft.Container(height=16),
+                ft.Column(controls=[
+                    ft.Row(controls=cards[0:2], spacing=16),
+                    ft.Row(controls=cards[2:4], spacing=16),
+                    ft.Row(controls=cards[4:6], spacing=16),
+                    ft.Row(controls=cards[6:],  spacing=16),
+                ], spacing=16),
+            ],
+            spacing=12,
+            scroll=ft.ScrollMode.AUTO,
         )
 
-    cards = [make_card(n, d, u, c) for n, d, u, c in courses]
-
-    return ft.Column(
-        controls=[
-            ft.Text("MATLAB Achievement Hub", size=42, color=STAR_WHITE,
-                    weight=ft.FontWeight.BOLD, font_family="Georgia"),
-            ft.Text("7 / 7 courses completed", size=16,
-                    color=AURORA1, font_family="Georgia"),
-            ft.Container(height=8),
-            star_divider(),
-            ft.Container(height=16),
-            ft.Column(controls=[
-                ft.Row(controls=cards[0:2], spacing=16),
-                ft.Row(controls=cards[2:4], spacing=16),
-                ft.Row(controls=cards[4:6], spacing=16),
-                ft.Row(controls=cards[6:],  spacing=16),
-            ], spacing=16),
-        ],
-        spacing=12,
-        scroll=ft.ScrollMode.AUTO,
-    )
     def timeline_page():
         def week_card(week, dates, phase, title, contributions, color):
             bullet_items = [
@@ -466,7 +436,6 @@ def matlab_page():
                 ], spacing=10)
                 for item in contributions
             ]
-
             return ft.Container(
                 content=ft.Column([
                     ft.Row([
@@ -510,73 +479,36 @@ def matlab_page():
                 ft.Container(height=8),
                 star_divider(),
                 ft.Container(height=24),
-
-                week_card(
-                    week="1–2", dates="02–13 Mar", phase="PHASE 0",
-                    title="Team Setup",
-                    contributions=[
-                        "Joined Group 13 as Assistant Project Manager",
-                        "Helped set up the GitHub repository",
-                        "Set up Expo + React Native + Firebase on my machine",
-                    ],
-                    color=MUTED,
-                ),
+                week_card("1–2", "02–13 Mar", "PHASE 0", "Team Setup", [
+                    "Joined Group 13 as Assistant Project Manager",
+                    "Helped set up the GitHub repository",
+                    "Set up Expo + React Native + Firebase on my machine",
+                ], MUTED),
                 ft.Container(height=12),
-
-                week_card(
-                    week="3–4", dates="16–27 Mar", phase="PHASE 1",
-                    title="Pitch Week & Public Speaking",
-                    contributions=[
-                        "Contributed to pitching the Fix-Flow idea to Mr. Abisai",
-                        "Fix-Flow officially registered and approved",
-                    ],
-                    color=AURORA3,
-                ),
+                week_card("3–4", "16–27 Mar", "PHASE 1", "Pitch Week & Public Speaking", [
+                    "Contributed to pitching the Fix-Flow idea to Mr. Abisai",
+                    "Fix-Flow officially registered and approved",
+                ], AURORA3),
                 ft.Container(height=12),
-
-                week_card(
-                    week="5–8", dates="30 Mar–25 Apr", phase="PHASE 2",
-                    title="SRS & MATLAB Certificates",
-                    contributions=[
-                        "Helped complete and submit the SRS document",
-                    ],
-                    color=GOLD,
-                ),
+                week_card("5–8", "30 Mar–25 Apr", "PHASE 2", "SRS & MATLAB Certificates", [
+                    "Helped complete and submit the SRS document",
+                ], GOLD),
                 ft.Container(height=12),
-
-                week_card(
-                    week="9–12", dates="27 Apr–30 May", phase="PHASE 3",
-                    title="ReportScreen Development",
-                    contributions=[
-                        "Developed ReportScreen.js — the main home screen of Fix-Flow",
-                        "PR #7 submitted and successfully merged",
-                        "Reviewed team pull requests and resolved merge conflicts",
-                    ],
-                    color=AURORA2,
-                ),
+                week_card("9–12", "27 Apr–30 May", "PHASE 3", "ReportScreen Development", [
+                    "Developed ReportScreen.js — the main home screen of Fix-Flow",
+                    "PR #7 submitted and successfully merged",
+                    "Reviewed team pull requests and resolved merge conflicts",
+                ], AURORA2),
                 ft.Container(height=12),
-
-                week_card(
-                    week="13", dates="01–06 Jun", phase="PHASE 4A",
-                    title="Live Demo",
-                    contributions=[
-                        "Part of the team that presented the live Expo demo to Mr. Abisai",
-                        "Submitted PR #20 with additional improvements",
-                    ],
-                    color=AURORA1,
-                ),
+                week_card("13", "01–06 Jun", "PHASE 4A", "Live Demo", [
+                    "Part of the team that presented the live Expo demo to Mr. Abisai",
+                    "Submitted PR #20 with additional improvements",
+                ], AURORA1),
                 ft.Container(height=12),
-
-                week_card(
-                    week="14", dates="08–15 Jun", phase="PHASE 4B",
-                    title="Final Submission",
-                    contributions=[
-                        "Helped finalise and build the APK via Expo EAS",
-                        "Submitted this personal portfolio as final deliverable",
-                    ],
-                    color=GOLD,
-                ),
-
+                week_card("14", "08–15 Jun", "PHASE 4B", "Final Submission", [
+                    "Helped finalise and build the APK via Expo EAS",
+                    "Submitted this personal portfolio as final deliverable",
+                ], GOLD),
                 ft.Container(height=24),
             ],
             spacing=0,
@@ -707,46 +639,31 @@ def matlab_page():
                 ft.Container(height=8),
                 ft.Text(title, size=20, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                ft.Text(period, size=11, color=MUTED,
-                        font_family="Courier New"),
+                ft.Text(period, size=11, color=MUTED, font_family="Courier New"),
                 ft.Container(height=10),
-                ft.Text(description, size=13, color=TEXT,
-                        font_family="Georgia"),
+                ft.Text(description, size=13, color=TEXT, font_family="Georgia"),
             ]
-
             if details:
                 controls.append(ft.Container(height=10))
                 for item in details:
                     controls.append(
                         ft.Row([
-                            ft.Container(
-                                width=6, height=6,
-                                bgcolor=color,
-                                border_radius=3,
-                            ),
-                            ft.Text(item, size=12, color=TEXT,
-                                    font_family="Georgia"),
+                            ft.Container(width=6, height=6, bgcolor=color, border_radius=3),
+                            ft.Text(item, size=12, color=TEXT, font_family="Georgia"),
                         ], spacing=10)
                     )
-
             if screenshots:
                 controls.append(ft.Container(height=12))
-                controls.append(
-                    ft.Text("Screenshots", size=12, color=MUTED,
-                            font_family="Courier New",
-                            weight=ft.FontWeight.BOLD)
-                )
+                controls.append(ft.Text("Screenshots", size=12, color=MUTED,
+                                        font_family="Courier New",
+                                        weight=ft.FontWeight.BOLD))
                 controls.append(ft.Container(height=8))
                 controls.append(
                     ft.Row(
                         controls=[
                             ft.Container(
-                                content=ft.Image(
-                                    src=s,
-                                    width=320,
-                                    height=200,
-                                    border_radius=ft.BorderRadius.all(8),
-                                ),
+                                content=ft.Image(src=s, width=320, height=200,
+                                                 border_radius=ft.BorderRadius.all(8)),
                                 border=ft.Border.all(1, color),
                                 border_radius=ft.BorderRadius.all(8),
                             )
@@ -755,7 +672,6 @@ def matlab_page():
                         spacing=12,
                     )
                 )
-
             return ft.Container(
                 content=ft.Column(controls=controls, spacing=4),
                 bgcolor=CARD_BG,
@@ -867,11 +783,8 @@ def matlab_page():
                             size=13, color=TEXT, font_family="Georgia",
                         ),
                         ft.Container(height=12),
-                        ft.Image(
-                            src="PR7 .png",
-                            width=700,
-                            border_radius=ft.BorderRadius.all(8),
-                        ),
+                        ft.Image(src="PR7 .png", width=700,
+                                 border_radius=ft.BorderRadius.all(8)),
                     ], spacing=4),
                     bgcolor=CARD_BG, border_radius=16, padding=20,
                     border=ft.Border.all(1, AURORA1), expand=True,
@@ -892,17 +805,11 @@ def matlab_page():
                             size=13, color=TEXT, font_family="Georgia",
                         ),
                         ft.Container(height=12),
-                        ft.Image(
-                            src="PR20 .png",
-                            width=700,
-                            border_radius=ft.BorderRadius.all(8),
-                        ),
+                        ft.Image(src="PR20 .png", width=700,
+                                 border_radius=ft.BorderRadius.all(8)),
                         ft.Container(height=12),
-                        ft.Image(
-                            src="PR20-2.png",
-                            width=700,
-                            border_radius=ft.BorderRadius.all(8),
-                        ),
+                        ft.Image(src="PR20-2.png", width=700,
+                                 border_radius=ft.BorderRadius.all(8)),
                     ], spacing=4),
                     bgcolor=CARD_BG, border_radius=16, padding=20,
                     border=ft.Border.all(1, AURORA3), expand=True,
@@ -926,11 +833,8 @@ def matlab_page():
                         ft.Text("Top Contributors Graph", size=14, color=GOLD,
                                 font_family="Courier New", weight=ft.FontWeight.BOLD),
                         ft.Container(height=8),
-                        ft.Image(
-                            src="TOP-COMMITERS GRAPH.png",
-                            width=700,
-                            border_radius=ft.BorderRadius.all(8),
-                        ),
+                        ft.Image(src="TOP-COMMITERS GRAPH.png", width=700,
+                                 border_radius=ft.BorderRadius.all(8)),
                     ], spacing=4),
                     bgcolor=CARD_BG, border_radius=16, padding=20,
                     border=ft.Border.all(1, GOLD), expand=True,
@@ -975,8 +879,7 @@ def matlab_page():
 
     def make_nav_btn(label, route):
         btn = ft.Container(
-            content=ft.Text(label, size=12, color=MUTED,
-                            font_family="Georgia"),
+            content=ft.Text(label, size=12, color=MUTED, font_family="Georgia"),
             padding=sym_pad(horizontal=10, vertical=12),
             bgcolor="transparent",
             border=ft.Border.only(bottom=ft.BorderSide(2, "transparent")),
@@ -993,7 +896,7 @@ def matlab_page():
                         weight=ft.FontWeight.BOLD, font_family="Courier New"),
                 ft.Row(
                     controls=[
-                        make_nav_btn("Home",      "about"),
+                        make_nav_btn("Home",       "about"),
                         make_nav_btn("Skills",     "skills"),
                         make_nav_btn("Timeline",   "timeline"),
                         make_nav_btn("Projects",   "projects"),
@@ -1016,10 +919,7 @@ def matlab_page():
 
     page.add(
         ft.Column(
-            controls=[
-                navbar,
-                content_area,
-            ],
+            controls=[navbar, content_area],
             spacing=0,
             expand=True,
         )
