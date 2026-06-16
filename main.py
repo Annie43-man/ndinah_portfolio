@@ -355,34 +355,28 @@ def main(page: ft.Page):
             ("Simulink Onramp",                          "24 April 2026", "1FkjknSGWrJISwW3jufVsYoTj4i11cHDU", AURORA3),
         ]
 
-        def open_cert(file_id):
-            url = f"https://drive.google.com/file/d/{file_id}/view?usp=sharing"
-            page.launch_url(url, web_window_name="_blank")
-
         def make_card(name, date, file_id, color):
-            return ft.Container(
-                content=ft.Column([
-                    ft.Text(name, size=14, color=STAR_WHITE,
-                            weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                    ft.Text(date, size=11, color=MUTED, font_family="Georgia"),
-                    ft.Container(height=8),
-                    ft.Container(
-                        content=ft.Text("View Certificate", size=11,
-                                        color=color, font_family="Courier New",
-                                        weight=ft.FontWeight.BOLD),
-                        padding=sym_pad(horizontal=12, vertical=6),
-                        border=ft.Border.all(1, color),
-                        border_radius=20,
-                        ink=True,
-                        on_click=lambda e, fid=file_id: open_cert(fid),
+           url = f"https://drive.google.com/file/d/{file_id}/view?usp=sharing"
+           return ft.Container(
+             content=ft.Column([
+                 ft.Text(name, size=14, color=STAR_WHITE,
+                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
+                 ft.Text(date, size=11, color=MUTED, font_family="Georgia"),
+                 ft.Container(height=8),
+                 ft.TextButton(
+                     content=ft.Text("View Certificate", size=11, color=color,
+                                     font_family="Courier New",
+                                     weight=ft.FontWeight.BOLD),
+                    url=url,
                     ),
-                ], spacing=6),
-                bgcolor=CARD_BG,
-                border_radius=16,
-                padding=20,
-                border=ft.Border.all(1, color),
-                expand=True,
-            )
+                    
+        ], spacing=6),
+        bgcolor=CARD_BG,
+        border_radius=16,
+        padding=20,
+        border=ft.Border.all(1, color),
+        expand=True,
+    )
 
         cards = [make_card(n, d, fid, c) for n, d, fid, c in courses]
 
