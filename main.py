@@ -24,6 +24,10 @@ STAR_WHITE  = "#f0eeff"
 def sym_pad(horizontal=0, vertical=0):
     return ft.Padding.symmetric(horizontal=horizontal, vertical=vertical)
 
+def drive_embed(file_id):
+    drive_url = f"https://drive.google.com/file/d/{file_id}/view"
+    return f"https://docs.google.com/viewer?url={drive_url}&embedded=true"
+
 def main(page: ft.Page):
     page.bgcolor = "#03010a"
     page.padding = 0
@@ -347,18 +351,19 @@ def main(page: ft.Page):
 
     def matlab_page():
         courses = [
-            ("MATLAB Onramp",                            "3 March 2026",  "https://drive.google.com/file/d/1q7-d7p14utH42EZ7JfguIwE2_Sx32I-L/preview", AURORA1),
-            ("Calculations with Vectors and Matrices",   "6 March 2026",  "https://drive.google.com/file/d/1_jOFafOH0w8Dagq7lW60x21NNiX5a8vD/preview", AURORA2),
-            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "https://drive.google.com/file/d/1P2tEwFmffLezYaPFDYqEEVeQ097Br0-2/preview", AURORA3),
-            ("Make and Manipulate Matrices",             "20 March 2026", "https://drive.google.com/file/d/1PuA_DQMcUxkTC4Yw25Um6k6wpn8wkVRN/preview", GOLD),
-            ("Explore Data with MATLAB Plots",           "20 March 2026", "https://drive.google.com/file/d/13CIFmY0O_K0Afd7e1Cq5Wo3mdTq5Zt0J/preview", AURORA1),
-            ("Machine Learning Onramp",                  "18 April 2026", "https://drive.google.com/file/d/1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp/preview", AURORA2),
-            ("Simulink Onramp",                          "24 April 2026", "https://drive.google.com/file/d/1FkjknSGWrJISwW3jufVsYoTj4i11cHDU/preview", AURORA3),
+            ("MATLAB Onramp",                            "3 March 2026",  "1q7-d7p14utH42EZ7JfguIwE2_Sx32I-L", AURORA1),
+            ("Calculations with Vectors and Matrices",   "6 March 2026",  "1_jOFafOH0w8Dagq7lW60x21NNiX5a8vD", AURORA2),
+            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "1P2tEwFmffLezYaPFDYqEEVeQ097Br0-2", AURORA3),
+            ("Make and Manipulate Matrices",             "20 March 2026", "1PuA_DQMcUxkTC4Yw25Um6k6wpn8wkVRN", GOLD),
+            ("Explore Data with MATLAB Plots",           "20 March 2026", "13CIFmY0O_K0Afd7e1Cq5Wo3mdTq5Zt0J", AURORA1),
+            ("Machine Learning Onramp",                  "18 April 2026", "1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp", AURORA2),
+            ("Simulink Onramp",                          "24 April 2026", "1FkjknSGWrJISwW3jufVsYoTj4i11cHDU", AURORA3),
         ]
 
         viewer = ft.Container(visible=False)
 
-        def open_pdf(url, name, color):
+        def open_pdf(file_id, name, color):
+            url = drive_embed(file_id)
             viewer.content = ft.Column([
                 ft.Row([
                     ft.Text(name, size=14, color=STAR_WHITE,
@@ -380,7 +385,7 @@ def main(page: ft.Page):
             viewer.visible = False
             page.update()
 
-        def make_card(name, date, url, color):
+        def make_card(name, date, file_id, color):
             return ft.Container(
                 content=ft.Column([
                     ft.Text(name, size=14, color=STAR_WHITE,
@@ -395,7 +400,7 @@ def main(page: ft.Page):
                         border=ft.Border.all(1, color),
                         border_radius=20,
                         ink=True,
-                        on_click=lambda e, u=url, n=name, c=color: open_pdf(u, n, c),
+                        on_click=lambda e, fid=file_id, n=name, c=color: open_pdf(fid, n, c),
                     ),
                 ], spacing=6),
                 bgcolor=CARD_BG,
@@ -405,7 +410,7 @@ def main(page: ft.Page):
                 expand=True,
             )
 
-        cards = [make_card(n, d, u, c) for n, d, u, c in courses]
+        cards = [make_card(n, d, fid, c) for n, d, fid, c in courses]
 
         return ft.Column(
             controls=[
