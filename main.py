@@ -1,6 +1,5 @@
 import flet as ft
 import flet_video as fv
-import flet_webview as fwv
 import os
 import base64
 
@@ -376,92 +375,87 @@ def main(page: ft.Page):
             scroll=ft.ScrollMode.AUTO,
         )
 
-    def matlab_page():
-        courses = [
-            ("MATLAB Onramp",                            "3 March 2026",  "Matlab-Onramp.pdf",                                    AURORA1),
-            ("Calculations with Vectors and Matrices",   "6 March 2026",  "Calculation-with-Vectors-and-Matrices.pdf",            AURORA2),
-            ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "MATLAB-Desktop-Tools-and-Troubleshooting-Scripts.pdf", AURORA3),
-            ("Make-and Manipulate Matrices",             "20 March 2026", "Make-and-Manipulate-Matrices.pdf",                    GOLD),
-            ("Explore Data with MATLAB Plots",           "20 March 2026", "Explore-Data-with-MATLAB-Plots.pdf",                  AURORA1),
-            ("Machine Learning Onramp",                  "18 April 2026", "Machine-Learning-Onramp.pdf",                        AURORA2),
-            ("Simulink Onramp",                          "24 April 2026", "Simulink-Onramp.pdf",                                AURORA3),
-        ]
+def matlab_page():
+    courses = [
+        ("MATLAB Onramp",                            "3 March 2026",  "https://drive.google.com/file/d/1q7-d7p14utH42EZ7JfguIwE2_Sx32I-L/preview", AURORA1),
+        ("Calculations with Vectors and Matrices",   "6 March 2026",  "https://drive.google.com/file/d/1_jOFafOH0w8Dagq7lW60x21NNiX5a8vD/preview", AURORA2),
+        ("MATLAB Desktop Tools and Troubleshooting", "8 March 2026",  "https://drive.google.com/file/d/1P2tEwFmffLezYaPFDYqEEVeQ097Br0-2/preview", AURORA3),
+        ("Make and Manipulate Matrices",             "20 March 2026", "https://drive.google.com/file/d/1PuA_DQMcUxkTC4Yw25Um6k6wpn8wkVRN/preview", GOLD),
+        ("Explore Data with MATLAB Plots",           "20 March 2026", "https://drive.google.com/file/d/13CIFmY0O_K0Afd7e1Cq5Wo3mdTq5Zt0J/preview", AURORA1),
+        ("Machine Learning Onramp",                  "18 April 2026", "https://drive.google.com/file/d/1rBXFtK5J5Z97eX2POqHVCMYrpgqi99Zp/preview", AURORA2),
+        ("Simulink Onramp",                          "24 April 2026", "https://drive.google.com/file/d/1FkjknSGWrJISwW3jufVsYoTj4i11cHDU/preview", AURORA3),
+    ]
 
-        def open_pdf(filename):
-            def close(e):
-                dialog.open = False
-                page.update()
-
-            dialog = ft.AlertDialog(
-                modal=True,
-                bgcolor=CARD_BG,
-                shape=ft.RoundedRectangleBorder(radius=16),
-                title=ft.Row([
-                    ft.Text(filename.replace(".pdf", "").replace("-", " "),
-                            size=13, color=STAR_WHITE,
-                            font_family="Georgia", expand=True),
-                    ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED, on_click=close),
-                ]),
-                content=ft.Container(
-                    content=fwv.WebView(
-                        url=f"/{filename}",
-                        expand=True,
-                    ),
-                    width=820,
-                    height=600,
-                ),
-            )
-            page.overlay.append(dialog)
-            dialog.open = True
+    def open_pdf(url, name):
+        def close(e):
+            dialog.open = False
             page.update()
 
-        def make_card(name, date, filename, color):
-            return ft.Container(
-                content=ft.Column([
-                    ft.Text(name, size=14, color=STAR_WHITE,
-                            weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                    ft.Text(date, size=11, color=MUTED, font_family="Georgia"),
-                    ft.Container(height=8),
-                    ft.Container(
-                        content=ft.Text("View Certificate", size=11,
-                                        color=color, font_family="Courier New",
-                                        weight=ft.FontWeight.BOLD),
-                        padding=sym_pad(horizontal=12, vertical=6),
-                        border=ft.Border.all(1, color),
-                        border_radius=20,
-                        ink=True,
-                        on_click=lambda e, f=filename: open_pdf(f),
-                    ),
-                ], spacing=6),
-                bgcolor=CARD_BG,
-                border_radius=16,
-                padding=20,
-                border=ft.Border.all(1, color),
-                expand=True,
-            )
+        dialog = ft.AlertDialog(
+            modal=True,
+            bgcolor=CARD_BG,
+            shape=ft.RoundedRectangleBorder(radius=16),
+            title=ft.Row([
+                ft.Text(name, size=13, color=STAR_WHITE,
+                        font_family="Georgia", expand=True),
+                ft.IconButton(ft.Icons.CLOSE, icon_color=MUTED, on_click=close),
+            ]),
+            content=ft.Container(
+                content=ft.HtmlIframe(src=url, width=820, height=560),
+                width=820,
+                height=560,
+            ),
+        )
+        page.overlay.append(dialog)
+        dialog.open = True
+        page.update()
 
-        cards = [make_card(n, d, f, c) for n, d, f, c in courses]
-
-        return ft.Column(
-            controls=[
-                ft.Text("MATLAB Achievement Hub", size=42, color=STAR_WHITE,
+    def make_card(name, date, url, color):
+        return ft.Container(
+            content=ft.Column([
+                ft.Text(name, size=14, color=STAR_WHITE,
                         weight=ft.FontWeight.BOLD, font_family="Georgia"),
-                ft.Text("7 / 7 courses completed", size=16,
-                        color=AURORA1, font_family="Georgia"),
+                ft.Text(date, size=11, color=MUTED, font_family="Georgia"),
                 ft.Container(height=8),
-                star_divider(),
-                ft.Container(height=16),
-                ft.Column(controls=[
-                    ft.Row(controls=cards[0:2], spacing=16),
-                    ft.Row(controls=cards[2:4], spacing=16),
-                    ft.Row(controls=cards[4:6], spacing=16),
-                    ft.Row(controls=cards[6:],  spacing=16),
-                ], spacing=16),
-            ],
-            spacing=12,
-            scroll=ft.ScrollMode.AUTO,
+                ft.Container(
+                    content=ft.Text("View Certificate", size=11,
+                                    color=color, font_family="Courier New",
+                                    weight=ft.FontWeight.BOLD),
+                    padding=sym_pad(horizontal=12, vertical=6),
+                    border=ft.Border.all(1, color),
+                    border_radius=20,
+                    ink=True,
+                    on_click=lambda e, u=url, n=name: open_pdf(u, n),
+                ),
+            ], spacing=6),
+            bgcolor=CARD_BG,
+            border_radius=16,
+            padding=20,
+            border=ft.Border.all(1, color),
+            expand=True,
         )
 
+    cards = [make_card(n, d, u, c) for n, d, u, c in courses]
+
+    return ft.Column(
+        controls=[
+            ft.Text("MATLAB Achievement Hub", size=42, color=STAR_WHITE,
+                    weight=ft.FontWeight.BOLD, font_family="Georgia"),
+            ft.Text("7 / 7 courses completed", size=16,
+                    color=AURORA1, font_family="Georgia"),
+            ft.Container(height=8),
+            star_divider(),
+            ft.Container(height=16),
+            ft.Column(controls=[
+                ft.Row(controls=cards[0:2], spacing=16),
+                ft.Row(controls=cards[2:4], spacing=16),
+                ft.Row(controls=cards[4:6], spacing=16),
+                ft.Row(controls=cards[6:],  spacing=16),
+            ], spacing=16),
+        ],
+        spacing=12,
+        scroll=ft.ScrollMode.AUTO,
+    )
     def timeline_page():
         def week_card(week, dates, phase, title, contributions, color):
             bullet_items = [

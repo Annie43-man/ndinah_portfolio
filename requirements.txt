@@ -1,4 +1,3 @@
 flet==0.85.3
 flet-video
-flet-webview
 typing_extensions
